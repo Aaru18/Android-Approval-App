@@ -8,44 +8,56 @@
         android:orientation="vertical"
         android:background="#FFF"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        tools:context="in.ac.lnmiit.android.appointr.S_Home">
+        tools:context="in.ac.lnmiit.android.appointr.Home.S_Home">
 
-        <include
-            layout="@layout/app_bar"
-           />
-
-        <android.support.v4.widget.DrawerLayout
-            android:id="@+id/drawer"
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="?attr/actionBarSize"
+        android:background="@color/colorPrimary">
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <FrameLayout
-                android:id="@+id/content_frame"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" >
-
-                <android.support.design.widget.CoordinatorLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                    <android.support.design.widget.FloatingActionButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="bottom|end"
-                        android:layout_margin="16dp"
-                        android:src="@mipmap/ic_add_white_24dp"
-                        android:id="@+id/addition"/>
-
-                </android.support.design.widget.CoordinatorLayout>
-            </FrameLayout>
-
-            <ListView
-                android:id="@+id/d_list"
-                android:layout_width="305dp"
+            <ImageView
+                android:id="@+id/nav"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:background="#9e9e9e"
-                android:layout_gravity="start" />
+                android:src="@drawable/ic_action_dehaze"
+                android:layout_marginRight="8dp"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="8"
+                android:layout_height="match_parent"
+                android:text="Home"
+                android:textSize="24sp"
+                android:paddingLeft="16dp"
+                android:textColor="#FFFFFF"/>
+            <ImageView
+                android:id="@+id/create"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_action_create"
+                android:layout_marginRight="16dp"/>
 
-        </android.support.v4.widget.DrawerLayout>
+        </LinearLayout>
 
+    </android.support.v7.widget.Toolbar>
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tabs2"
+        style="@style/CategoryTab"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        app:tabTextColor="#616161"
+        app:tabSelectedTextColor="@android:color/white"/>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
 
     </LinearLayout>
