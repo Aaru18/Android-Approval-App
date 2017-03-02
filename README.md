@@ -14,5 +14,3 @@
  And if the student request is very urgent which need to be served immediately
  then faculty will provide corresponding material with mail.
 
-
-

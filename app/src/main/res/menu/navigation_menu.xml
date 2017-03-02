@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+  >
+    <item
+        android:id="@+id/home_page"
+        android:title="Home Page"
+        android:icon="@mipmap/ic_home_black_24dp"
+        />
+    <item
+        android:id="@+id/feedback"
+        android:title="Feedback"
+        android:icon="@mipmap/ic_feedback_black_24dp"/>
+    <item
+        android:id="@+id/log_out"
+        android:title="Log Out"
+        android:icon="@mipmap/ic_exit_to_app_black_24dp"/>
+    <item
+        android:id="@+id/about_us"
+        android:title="About Us"
+        android:icon="@mipmap/ic_info_outline_black_24dp"/>
+
+
+
+
+</menu>
