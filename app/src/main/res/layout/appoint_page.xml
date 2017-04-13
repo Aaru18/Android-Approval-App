@@ -5,11 +5,11 @@
         android:layout_height="match_parent"
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
-        tools:context="in.ac.lnmiit.android.appointr.Appoint"
+        tools:context="in.ac.lnmiit.android.appointr.Activities.Appoint"
         android:background="#FFF"
         android:orientation="vertical">
         <android.support.v7.widget.Toolbar
-            android:id="@+id/my_toolbar"
+            android:id="@+id/appoint_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:minHeight="?attr/actionBarSize"
@@ -21,23 +21,27 @@
                     android:id="@+id/back"
                     android:layout_width="0dp"
                     android:layout_weight="1"
+                    android:padding="4dp"
                     android:layout_height="match_parent"
                     android:src="@drawable/ic_action_arrow_back"
-                    android:paddingRight="8dp"/>
+                    android:layout_marginRight="8dp"/>
                 <TextView
                     android:layout_width="0dp"
                     android:layout_weight="8"
                     android:layout_height="match_parent"
+                    android:layout_marginLeft="8dp"
                     android:text="@string/appointment_request"
+                    android:gravity="center_vertical"
                     android:textSize="18sp"
                     android:textColor="#FFFFFF"/>
                 <ImageView
                     android:id="@+id/send"
                     android:layout_width="0dp"
                     android:layout_weight="1"
+                    android:padding="4dp"
                     android:layout_height="match_parent"
                     android:src="@drawable/ic_action_send"
-                    android:paddingRight="8dp"/>
+                    android:layout_marginRight="8dp"/>
 
             </LinearLayout>
 
@@ -107,7 +111,7 @@
                     android:layout_height="wrap_content"
                     android:text="Select Date"
                     android:textColor="@android:color/black"
-                    android:textSize="16sp"
+                    android:textSize="18sp"
                     android:clickable="true"
                     android:paddingRight="16dp"
                     android:paddingTop="16dp"
@@ -130,7 +134,7 @@
                     android:layout_height="wrap_content"
                     android:text="Select Time"
                     android:textColor="@android:color/black"
-                    android:textSize="16sp"
+                    android:textSize="18sp"
                     android:paddingRight="16dp"
                     android:paddingTop="16dp"
                     android:paddingBottom="16dp"/>
@@ -152,6 +156,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textMultiLine"
+                    android:maxLength="90"
                     android:scrollbars="vertical"
                     android:textColor="@android:color/black" />
                 <View

@@ -5,9 +5,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import in.ac.lnmiit.android.appointr.Home.ConfirmedFragment;
+import in.ac.lnmiit.android.appointr.Fragments.ConfirmedFragment;
 import in.ac.lnmiit.android.appointr.R;
-import in.ac.lnmiit.android.appointr.Home.UnconfirmedFragment;
+import in.ac.lnmiit.android.appointr.Fragments.UnconfirmedFragment;
 
 public class CategoryAdapter  extends FragmentPagerAdapter{
     private Context mContext;

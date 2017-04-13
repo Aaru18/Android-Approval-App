@@ -7,11 +7,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingBottom="@dimen/activity_vertical_margin"
-        tools:context="in.ac.lnmiit.android.appointr.Reply"
+        tools:context="in.ac.lnmiit.android.appointr.Activities.Reply"
         android:background="#FFF"
         android:orientation="vertical">
         <android.support.v7.widget.Toolbar
-            android:id="@+id/my_toolbar"
+            android:id="@+id/reply_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:minHeight="?attr/actionBarSize"
@@ -23,14 +23,16 @@
                     android:id="@+id/back1"
                     android:layout_width="0dp"
                     android:layout_weight="1"
+                    android:padding="4dp"
                     android:layout_height="match_parent"
                     android:src="@drawable/ic_action_arrow_back"
-                    android:paddingRight="8dp"/>
+                    android:layout_marginRight="8dp"/>
                 <TextView
                     android:layout_width="0dp"
                     android:layout_weight="8"
                     android:layout_height="match_parent"
                     android:text="@string/appointment_request"
+                    android:gravity="center_vertical"
                     android:textSize="18sp"
                     android:textColor="#FFFFFF"/>
 
@@ -54,21 +56,25 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:padding="16dp"
+            android:paddingBottom="0dp">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Student Name"
                 android:textColor="@color/colorPrimary"
                 android:textSize="18sp"
-                android:paddingTop="16dp"/>
+               />
             <TextView
                 android:id="@+id/student_field"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@android:color/black"
+                android:layout_gravity="center"
                 android:textSize="18sp"
-                android:paddingTop="16dp"/>
+                android:text="Shubham Mangal"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"/>
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -79,17 +85,18 @@
                 android:text="Appointment Date"
                 android:textColor="@color/colorPrimary"
                 android:textSize="18sp"
-                android:paddingTop="16dp"/>
+                android:paddingTop="8dp"/>
             <TextView
                 android:id="@+id/date_reply"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@android:color/black"
-                android:textSize="16sp"
+                android:textSize="18sp"
+                android:text="26/12/2017"
                 android:clickable="false"
                 android:paddingRight="16dp"
-                android:paddingTop="16dp"
-                android:paddingBottom="16dp"/>
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"/>
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -101,17 +108,18 @@
                 android:textColor="@color/colorPrimary"
                 android:textSize="18sp"
                 android:clickable="true"
-                android:paddingTop="16dp"/>
+                android:paddingTop="8dp"/>
             <TextView
                 android:id="@+id/time_reply"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@android:color/black"
                 android:clickable="false"
-                android:textSize="16sp"
+                android:textSize="18sp"
+                android:text="15:00"
                 android:paddingRight="16dp"
-                android:paddingTop="16dp"
-                android:paddingBottom="16dp"/>
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"/>
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -129,8 +137,12 @@
                 android:id="@+id/reasonss"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:lines="3"
+                android:text="Reason"
+                android:textSize="16sp"
+                android:paddingBottom="8dp"
+                android:maxLines="3"
                 android:scrollbars="vertical"
+                android:paddingTop="8dp"
                 android:textColor="@android:color/black" />
             <View
                 android:layout_width="match_parent"
@@ -139,6 +151,7 @@
            <LinearLayout
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
+               android:paddingTop="8dp"
                android:orientation="horizontal">
                <Button
                    android:layout_marginTop="16dp"
@@ -146,7 +159,7 @@
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
                    android:text="Accept"
-                   android:padding="16dp"
+                   android:padding="8dp"
                    android:layout_weight="1"
                    android:background="@color/colorPrimary"
                    android:textSize="20dp"/>
@@ -159,7 +172,7 @@
                    android:layout_height="wrap_content"
                    android:text="Reject"
                    android:layout_weight="1"
-                   android:padding="16dp"
+                   android:padding="8dp"
                    android:background="@color/colorPrimary"
                    android:textSize="20dp"/>
            </LinearLayout>
@@ -167,27 +180,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-                <Button
-                    android:layout_marginTop="16dp"
-                    android:id="@+id/modify"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Modify"
-                    android:padding="16dp"
-                    android:layout_weight="1"
-                    android:background="@color/colorPrimary"
-                    android:textSize="20dp"/>
 
                 <Button
                     android:layout_marginTop="16dp"
                     android:id="@+id/mail"
-                    android:layout_marginLeft="16dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="E-Mail"
                     android:layout_weight="1"
-                    android:padding="16dp"
-                    android:enabled="false"
+                    android:padding="8dp"
                     android:background="@color/colorPrimary"
                     android:textSize="20dp"/>
             </LinearLayout>
