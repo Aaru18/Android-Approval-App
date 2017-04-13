@@ -21,23 +21,27 @@
                     android:id="@+id/back"
                     android:layout_width="0dp"
                     android:layout_weight="1"
+                    android:padding="4dp"
                     android:layout_height="match_parent"
                     android:src="@drawable/ic_action_arrow_back"
-                    android:paddingRight="8dp"/>
+                    android:layout_marginRight="8dp"/>
                 <TextView
                     android:layout_width="0dp"
                     android:layout_weight="8"
                     android:layout_height="match_parent"
+                    android:layout_marginLeft="8dp"
                     android:text="@string/appointment_request"
+                    android:gravity="center_vertical"
                     android:textSize="18sp"
                     android:textColor="#FFFFFF"/>
                 <ImageView
                     android:id="@+id/send"
                     android:layout_width="0dp"
                     android:layout_weight="1"
+                    android:padding="4dp"
                     android:layout_height="match_parent"
                     android:src="@drawable/ic_action_send"
-                    android:paddingRight="8dp"/>
+                    android:layout_marginRight="8dp"/>
 
             </LinearLayout>
 
@@ -152,6 +156,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textMultiLine"
+                    android:maxLength="90"
                     android:scrollbars="vertical"
                     android:textColor="@android:color/black" />
                 <View

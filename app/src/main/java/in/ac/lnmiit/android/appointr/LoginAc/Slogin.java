@@ -1,8 +1,6 @@
 package in.ac.lnmiit.android.appointr.LoginAc;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -17,6 +15,7 @@ import java.util.Map;
 
 import in.ac.lnmiit.android.appointr.ApiCall.ApiClient;
 import in.ac.lnmiit.android.appointr.ApiCall.ApiInterface;
+import in.ac.lnmiit.android.appointr.ApiCall.SessionManagement;
 import in.ac.lnmiit.android.appointr.ApiCall.login;
 import in.ac.lnmiit.android.appointr.Home.S_Home;
 import in.ac.lnmiit.android.appointr.R;
@@ -25,6 +24,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class Slogin extends AppCompatActivity {
+    SessionManagement session;
     private static final String TAG = Slogin.class.getSimpleName();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,11 +64,8 @@ public class Slogin extends AppCompatActivity {
                         if(success==1){
                             int id = response.body().getUser_id();
                             Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-                            SharedPreferences sharedPreference = getSharedPreferences("mypref", Context.MODE_PRIVATE);
-                            SharedPreferences.Editor editor = sharedPreference.edit();
-                            editor.putString("session","student");
-                            editor.putInt("id",id);
-                            editor.commit();
+                            session = new SessionManagement(getApplicationContext());
+                            session.createLoginSession("student",id);
                             Log.e(TAG, "Number request: " + success+" "+message);
                             Intent intent = new Intent(Slogin.this, S_Home.class);
                             startActivity(intent);

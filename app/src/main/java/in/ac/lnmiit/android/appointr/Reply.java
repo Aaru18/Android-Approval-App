@@ -1,8 +1,6 @@
 package in.ac.lnmiit.android.appointr;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -21,6 +19,7 @@ import in.ac.lnmiit.android.appointr.ApiCall.ApiInterface;
 import in.ac.lnmiit.android.appointr.ApiCall.General_Query;
 import in.ac.lnmiit.android.appointr.ApiCall.Request;
 import in.ac.lnmiit.android.appointr.ApiCall.RequestReq;
+import in.ac.lnmiit.android.appointr.ApiCall.SessionManagement;
 import in.ac.lnmiit.android.appointr.ApiCall.Student;
 import in.ac.lnmiit.android.appointr.ApiCall.Student_request;
 import in.ac.lnmiit.android.appointr.Home.F_Home;
@@ -43,9 +42,9 @@ public class Reply extends AppCompatActivity {
 
         }
         final Request[] ret = new Request[1];
-        SharedPreferences sharedPreferences = getSharedPreferences("mypref", Context.MODE_PRIVATE);
-        int user_id = sharedPreferences.getInt("id",0);
-        final String session_id = sharedPreferences.getString("session",null);
+        SessionManagement session = new SessionManagement(getApplicationContext());
+        int user_id = session.getID();
+        final String session_id = session.getSession();
         ApiInterface apiService =
                 ApiClient.getClient().create(ApiInterface.class);
         Map<String,String> names= new HashMap<String, String>();

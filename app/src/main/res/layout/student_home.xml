@@ -23,6 +23,7 @@
                 android:id="@+id/nav"
                 android:layout_width="0dp"
                 android:layout_weight="1"
+                android:padding="4dp"
                 android:layout_height="match_parent"
                 android:src="@drawable/ic_action_dehaze"
                 android:layout_marginRight="8dp"/>
@@ -31,13 +32,15 @@
                 android:layout_weight="8"
                 android:layout_height="match_parent"
                 android:text="Home"
-                android:textSize="24sp"
-                android:paddingLeft="16dp"
+                android:gravity="center_vertical"
+                android:textSize="18sp"
+                android:paddingLeft="18dp"
                 android:textColor="#FFFFFF"/>
             <ImageView
                 android:id="@+id/create"
                 android:layout_width="0dp"
                 android:layout_weight="1"
+                android:padding="4dp"
                 android:layout_height="match_parent"
                 android:src="@drawable/ic_action_create"
                 android:layout_marginRight="16dp"/>

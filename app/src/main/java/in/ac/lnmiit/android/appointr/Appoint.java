@@ -3,9 +3,7 @@ package in.ac.lnmiit.android.appointr;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -35,6 +33,7 @@ import in.ac.lnmiit.android.appointr.ApiCall.ApiInterface;
 import in.ac.lnmiit.android.appointr.ApiCall.Faculty;
 import in.ac.lnmiit.android.appointr.ApiCall.Faculty_request;
 import in.ac.lnmiit.android.appointr.ApiCall.General_Query;
+import in.ac.lnmiit.android.appointr.ApiCall.SessionManagement;
 import in.ac.lnmiit.android.appointr.Home.S_Home;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -48,13 +47,27 @@ public class Appoint extends AppCompatActivity  {
     TextView dispTime;
     DatePickerDialog.OnDateSetListener listener = new DatePickerDialog.OnDateSetListener(){
         public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth){
-            dispDate.setText(dayOfMonth + "/" + (monthOfYear+1) + "/" + year);
+            if(monthOfYear>10 && dayOfMonth >10)
+                dispDate.setText(dayOfMonth + "/" + (monthOfYear+1) + "/" + year);
+            else if(monthOfYear<10 && dayOfMonth >10)
+                dispDate.setText(dayOfMonth + "/0" +(monthOfYear+1) + "/" + year);
+            else if(monthOfYear>10 && dayOfMonth <10)
+                dispDate.setText("0"+dayOfMonth + "/" + (monthOfYear+1) + "/" + year);
+            else if(monthOfYear<10 && dayOfMonth <10)
+                dispDate.setText("0"+dayOfMonth + "/0" + (monthOfYear+1) + "/" + year);
+
         }
     };
     TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener(){
         public void onTimeSet(TimePicker view, int hourOfDay, int minute ){
-
-            dispTime.setText(hourOfDay + ":" + minute);
+            if(hourOfDay>10 && minute >10)
+                dispTime.setText(hourOfDay + ":" + minute);
+            else if(hourOfDay<10 && minute >10)
+                dispTime.setText("0"+hourOfDay + ":" + minute);
+            else if(hourOfDay>10 && minute <10)
+                dispTime.setText(hourOfDay + ":0" + minute);
+            else if(hourOfDay<10 && minute <10)
+                dispTime.setText("0"+hourOfDay + ":0" + minute);
         }
     };
     private Toolbar toolbar1;
@@ -165,8 +178,8 @@ public class Appoint extends AppCompatActivity  {
         appoint1.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
-                SharedPreferences sharedPreferences = getSharedPreferences("mypref", Context.MODE_PRIVATE);
-                int student_id = sharedPreferences.getInt("id",0);
+                SessionManagement session = new SessionManagement(getApplicationContext());
+                int student_id = session.getID();
                 int faculty_id=0;
                 for(int i=0;i<counts;i++){
                     if(faculty.get(i).getFaculty_name().equals(facul)){

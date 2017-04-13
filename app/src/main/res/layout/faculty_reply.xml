@@ -23,14 +23,16 @@
                     android:id="@+id/back1"
                     android:layout_width="0dp"
                     android:layout_weight="1"
+                    android:padding="4dp"
                     android:layout_height="match_parent"
                     android:src="@drawable/ic_action_arrow_back"
-                    android:paddingRight="8dp"/>
+                    android:layout_marginRight="8dp"/>
                 <TextView
                     android:layout_width="0dp"
                     android:layout_weight="8"
                     android:layout_height="match_parent"
                     android:text="@string/appointment_request"
+                    android:gravity="center_vertical"
                     android:textSize="18sp"
                     android:textColor="#FFFFFF"/>
 
