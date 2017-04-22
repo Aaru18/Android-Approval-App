@@ -161,7 +161,7 @@ public class Appoint extends AppCompatActivity  {
 
 
 
-        toolbar1 = (Toolbar) findViewById(R.id.my_toolbar);
+        toolbar1 = (Toolbar) findViewById(R.id.appoint_toolbar);
         setSupportActionBar(toolbar1);
         ImageView appoint = (ImageView) findViewById(R.id.back);
         appoint.setOnClickListener(new View.OnClickListener() {
@@ -268,5 +268,12 @@ public class Appoint extends AppCompatActivity  {
                 new TimePickerDialog(Appoint.this,onTimeSetListener,calendar1.get(Calendar.HOUR_OF_DAY),calendar1.get(Calendar.MINUTE),true).show();
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(Appoint.this, S_Home.class);
+        startActivity(intent);
+        finish();
     }
 }

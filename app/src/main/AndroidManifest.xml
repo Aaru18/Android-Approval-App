@@ -15,9 +15,8 @@
             android:name=".LoginAc.login_home"
             android:theme="@style/AppTheme">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
         <activity
@@ -67,7 +66,7 @@
             android:name=".Reply"
             android:theme="@style/AppTheme">
             <intent-filter>
-                <action android:name="android.intent.action.HOME" />
+                <action android:name="android.intent.action.REPLY" />
             </intent-filter>
         </activity>
     </application>

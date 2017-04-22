@@ -4,7 +4,7 @@
     <string name="close">Close</string>
 
     <string-array name="drawer_list">
-        <item><font color="#00ff00">Change Password</font></item>
+        <item>Change Password</item>
         <item>Feedback</item>
         <item>About Us</item>
         <item>Log Out</item>

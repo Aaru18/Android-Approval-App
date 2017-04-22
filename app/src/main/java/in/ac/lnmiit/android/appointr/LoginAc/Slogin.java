@@ -35,8 +35,7 @@ public class Slogin extends AppCompatActivity {
         changePassword.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
-                Intent intent = new Intent(Slogin.this, P_Reset.class);
-                startActivity(intent);
+                Toast.makeText(getApplicationContext(), "Contact Administrator For the Password", Toast.LENGTH_SHORT).show();
                 // Do something in response to button click
             }
         });

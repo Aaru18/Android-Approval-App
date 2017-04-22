@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -162,8 +163,18 @@ public class Reply extends AppCompatActivity {
                 // Do something in response to button click
             }
         });
-                toolbar1 = (Toolbar) findViewById(R.id.my_toolbar);
+        toolbar1 = (Toolbar) findViewById(R.id.reply_toolbar);
         setSupportActionBar(toolbar1);
+        ImageView appoint = (ImageView) findViewById(R.id.back1);
+        appoint.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View view) {
+                Intent intent = new Intent(Reply.this, F_Home.class);
+                startActivity(intent);
+                finish();
+                // Do something in response to button click
+            }
+        });
 
 
 
@@ -173,5 +184,10 @@ public class Reply extends AppCompatActivity {
 
     }
 
-
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(Reply.this, F_Home.class);
+        startActivity(intent);
+        finish();
+    }
 }

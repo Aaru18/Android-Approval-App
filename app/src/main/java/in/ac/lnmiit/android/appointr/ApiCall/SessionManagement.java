@@ -69,7 +69,7 @@ public class SessionManagement {
         if(this.isLoggedIn()){
             // user is not logged in redirect him to Login Activity
             Intent i;
-            if(this.KEY_NAME.equals("faculty")){
+            if(getSession().equals("faculty")){
                 i = new Intent(_context, F_Home.class);
             } else {
                 i = new Intent(_context, S_Home.class);
