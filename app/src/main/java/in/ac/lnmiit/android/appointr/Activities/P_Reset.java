@@ -1,4 +1,4 @@
-package in.ac.lnmiit.android.appointr.LoginAc;
+package in.ac.lnmiit.android.appointr.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,13 +14,12 @@ import android.widget.Toast;
 import java.util.HashMap;
 import java.util.Map;
 
-import in.ac.lnmiit.android.appointr.ApiCall.ApiClient;
-import in.ac.lnmiit.android.appointr.ApiCall.ApiInterface;
-import in.ac.lnmiit.android.appointr.ApiCall.General_Query;
-import in.ac.lnmiit.android.appointr.ApiCall.SessionManagement;
-import in.ac.lnmiit.android.appointr.Home.F_Home;
-import in.ac.lnmiit.android.appointr.Home.S_Home;
+import in.ac.lnmiit.android.appointr.DatabaseConnections.ApiClient;
+import in.ac.lnmiit.android.appointr.DatabaseConnections.ApiInterface;
+import in.ac.lnmiit.android.appointr.DatabaseConnections.DatabaseHelper;
+import in.ac.lnmiit.android.appointr.Functions.SessionManagement;
 import in.ac.lnmiit.android.appointr.R;
+import in.ac.lnmiit.android.appointr.models.General_Query;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -87,6 +86,7 @@ public class P_Reset extends AppCompatActivity {
                         if(success==1){
                             Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
                             session.logoutUser();
+                            new DatabaseHelper(getApplicationContext()).deleteDB(getApplicationContext());
                             Intent intent = new Intent(P_Reset.this, login_home.class);
                             startActivity(intent);
                             finish();

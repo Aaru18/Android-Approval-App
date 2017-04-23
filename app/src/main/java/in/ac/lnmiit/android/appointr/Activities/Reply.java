@@ -1,4 +1,4 @@
-package in.ac.lnmiit.android.appointr;
+package in.ac.lnmiit.android.appointr.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,15 +15,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import in.ac.lnmiit.android.appointr.ApiCall.ApiClient;
-import in.ac.lnmiit.android.appointr.ApiCall.ApiInterface;
-import in.ac.lnmiit.android.appointr.ApiCall.General_Query;
-import in.ac.lnmiit.android.appointr.ApiCall.Request;
-import in.ac.lnmiit.android.appointr.ApiCall.RequestReq;
-import in.ac.lnmiit.android.appointr.ApiCall.SessionManagement;
-import in.ac.lnmiit.android.appointr.ApiCall.Student;
-import in.ac.lnmiit.android.appointr.ApiCall.Student_request;
-import in.ac.lnmiit.android.appointr.Home.F_Home;
+import in.ac.lnmiit.android.appointr.DatabaseConnections.ApiClient;
+import in.ac.lnmiit.android.appointr.DatabaseConnections.ApiInterface;
+import in.ac.lnmiit.android.appointr.Functions.FunctionUsed;
+import in.ac.lnmiit.android.appointr.R;
+import in.ac.lnmiit.android.appointr.models.General_Query;
+import in.ac.lnmiit.android.appointr.models.Request;
+import in.ac.lnmiit.android.appointr.models.RequestReq;
+import in.ac.lnmiit.android.appointr.Functions.SessionManagement;
+import in.ac.lnmiit.android.appointr.models.Student;
+import in.ac.lnmiit.android.appointr.models.Student_request;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -65,10 +66,10 @@ public class Reply extends AppCompatActivity {
                        if(requestss.get(i).getRequest_id() == value){
                            ret[0] = requestss.get(i);
                           TextView t= (TextView)findViewById(R.id.date_reply);
-                           t.setText(ret[0].getRequest_date());
+                           t.setText(FunctionUsed.getStringFromDate(ret[0].getRequest_date()));
 
-                           TextView tq= (TextView)findViewById(R.id.time_reply);
-                           tq.setText(ret[0].getRequest_time());
+                         TextView tq= (TextView)findViewById(R.id.time_reply);
+                           tq.setText(FunctionUsed.getTimeSringFromDate(ret[0].getRequest_date()));
 
                            TextView ts= (TextView)findViewById(R.id.reasonss);
                            ts.setText(ret[0].getReason());

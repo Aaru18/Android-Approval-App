@@ -5,7 +5,7 @@
         android:layout_height="match_parent"
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
-        tools:context="in.ac.lnmiit.android.appointr.Appoint"
+        tools:context="in.ac.lnmiit.android.appointr.Activities.Appoint"
         android:background="#FFF"
         android:orientation="vertical">
         <android.support.v7.widget.Toolbar
@@ -111,7 +111,7 @@
                     android:layout_height="wrap_content"
                     android:text="Select Date"
                     android:textColor="@android:color/black"
-                    android:textSize="16sp"
+                    android:textSize="18sp"
                     android:clickable="true"
                     android:paddingRight="16dp"
                     android:paddingTop="16dp"
@@ -134,7 +134,7 @@
                     android:layout_height="wrap_content"
                     android:text="Select Time"
                     android:textColor="@android:color/black"
-                    android:textSize="16sp"
+                    android:textSize="18sp"
                     android:paddingRight="16dp"
                     android:paddingTop="16dp"
                     android:paddingBottom="16dp"/>

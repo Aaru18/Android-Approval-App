@@ -1,4 +1,4 @@
-package in.ac.lnmiit.android.appointr.ApiCall;
+package in.ac.lnmiit.android.appointr.models;
 
 import com.google.gson.annotations.SerializedName;
 

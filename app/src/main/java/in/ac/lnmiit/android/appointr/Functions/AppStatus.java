@@ -1,4 +1,4 @@
-package in.ac.lnmiit.android.appointr;
+package in.ac.lnmiit.android.appointr.Functions;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -6,7 +6,6 @@ import android.net.NetworkInfo;
 import android.util.Log;
 
 public class AppStatus {
-
     private static AppStatus instance = new AppStatus();
     static Context context;
     ConnectivityManager connectivityManager;
@@ -35,4 +34,5 @@ public class AppStatus {
         }
         return connected;
     }
+
 }

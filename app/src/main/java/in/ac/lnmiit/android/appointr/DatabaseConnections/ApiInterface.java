@@ -1,7 +1,12 @@
-package in.ac.lnmiit.android.appointr.ApiCall;
+package in.ac.lnmiit.android.appointr.DatabaseConnections;
 
 import java.util.Map;
 
+import in.ac.lnmiit.android.appointr.models.Faculty_request;
+import in.ac.lnmiit.android.appointr.models.General_Query;
+import in.ac.lnmiit.android.appointr.models.RequestReq;
+import in.ac.lnmiit.android.appointr.models.Student_request;
+import in.ac.lnmiit.android.appointr.models.login;
 import retrofit2.Call;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
@@ -39,5 +44,7 @@ public interface ApiInterface {
     @POST("show_request.php")
     Call<RequestReq> showRequests(@FieldMap Map<String, String> names);
 
-
+    @FormUrlEncoded
+    @POST("delete.php")
+    Call<General_Query> deleteAppointment(@FieldMap Map<String, String> names);
 }

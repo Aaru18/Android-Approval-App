@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/test"
-    tools:context="in.ac.lnmiit.android.appointr.LoginAc.login_home">
+    tools:context="in.ac.lnmiit.android.appointr.Activities.login_home">
 
     <LinearLayout
 
@@ -57,6 +57,6 @@
             android:textColor="#FFFFFF"
             android:background="#003333"
             android:fontFamily="monospace"/>
-
     </LinearLayout>
+
 </ScrollView>

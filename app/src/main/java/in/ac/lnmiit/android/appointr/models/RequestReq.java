@@ -1,35 +1,25 @@
-package in.ac.lnmiit.android.appointr.ApiCall;
+package in.ac.lnmiit.android.appointr.models;
 
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class Faculty_request {
-
+public class RequestReq {
     @SerializedName("success")
     private int success;
+    @SerializedName("requests")
+    private List<Request> requests;
     @SerializedName("message")
     private String message;
-    @SerializedName("faculties")
-    private List<Faculty> faculties;
     @SerializedName("count")
     private int count;
+
     public int getCount() {
         return count;
     }
 
     public void setCount(int count) {
         this.count = count;
-    }
-
-
-
-    public int getSuccess() {
-        return success;
-    }
-
-    public void setSuccess(int success) {
-        this.success = success;
     }
 
     public String getMessage() {
@@ -40,11 +30,19 @@ public class Faculty_request {
         this.message = message;
     }
 
-    public List<Faculty> getFaculties() {
-        return faculties;
+    public int getSuccess() {
+        return success;
     }
 
-    public void setFaculties(List<Faculty> faculties) {
-        this.faculties = faculties;
+    public void setSuccess(int success) {
+        this.success = success;
+    }
+
+    public List<Request> getRequests() {
+        return requests;
+    }
+
+    public void setRequests(List<Request> requests) {
+        this.requests = requests;
     }
 }

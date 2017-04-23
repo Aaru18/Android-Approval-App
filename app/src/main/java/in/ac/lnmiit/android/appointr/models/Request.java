@@ -1,4 +1,4 @@
-package in.ac.lnmiit.android.appointr.ApiCall;
+package in.ac.lnmiit.android.appointr.models;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -10,9 +10,7 @@ public class Request {
     @SerializedName("student_id")
     private int student_id;
     @SerializedName("request_date")
-    private String request_date;
-    @SerializedName("request_time")
-    private String request_time;
+    private long request_date;
     @SerializedName("reason")
     private String reason;
     @SerializedName("urgent")
@@ -23,6 +21,9 @@ public class Request {
     private String details;
     @SerializedName("modify_request")
     private int modify_request;
+
+    @SerializedName("isClose")
+    private int isClose;
 
     public int getRequest_id() {
         return request_id;
@@ -48,20 +49,12 @@ public class Request {
         this.student_id = student_id;
     }
 
-    public String getRequest_date() {
+    public long getRequest_date() {
         return request_date;
     }
 
-    public void setRequest_date(String request_date) {
+    public void setRequest_date(long request_date) {
         this.request_date = request_date;
-    }
-
-    public String getRequest_time() {
-        return request_time;
-    }
-
-    public void setRequest_time(String request_time) {
-        this.request_time = request_time;
     }
 
     public String getReason() {
@@ -102,5 +95,12 @@ public class Request {
 
     public void setModify_request(int modify_request) {
         this.modify_request = modify_request;
+    }
+    public int getIsClose() {
+        return isClose;
+    }
+
+    public void setIsClose(int isClose) {
+        this.isClose = isClose;
     }
 }

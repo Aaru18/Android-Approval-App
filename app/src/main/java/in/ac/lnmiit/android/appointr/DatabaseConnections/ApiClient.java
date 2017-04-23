@@ -1,4 +1,4 @@
-package in.ac.lnmiit.android.appointr.ApiCall;
+package in.ac.lnmiit.android.appointr.DatabaseConnections;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

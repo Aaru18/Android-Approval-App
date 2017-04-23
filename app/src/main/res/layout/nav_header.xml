@@ -17,19 +17,18 @@
             android:layout_width="50dp"
             android:id="@+id/img_nav"
             android:elevation="50dp"
-            android:src="@drawable/ic_learning"
             android:layout_alignParentTop="true">
         </ImageView>
 
         <TextView
-            android:id="@+id/name_student"
+            android:id="@+id/name_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="@dimen/nav_header_vertical_spacing"
             android:hint="Android Studio" />
 
         <TextView
-            android:id="@+id/email_student"
+            android:id="@+id/email_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="android.studio@android.com" />

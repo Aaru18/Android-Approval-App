@@ -1,4 +1,4 @@
-package in.ac.lnmiit.android.appointr.ApiCall;
+package in.ac.lnmiit.android.appointr.Functions;
 
 import android.content.Context;
 import android.content.Intent;
@@ -6,9 +6,9 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.util.Log;
 
-import in.ac.lnmiit.android.appointr.Home.F_Home;
-import in.ac.lnmiit.android.appointr.Home.S_Home;
-import in.ac.lnmiit.android.appointr.LoginAc.login_home;
+import in.ac.lnmiit.android.appointr.Activities.F_Home;
+import in.ac.lnmiit.android.appointr.Activities.S_Home;
+import in.ac.lnmiit.android.appointr.Activities.login_home;
 
 public class SessionManagement {
     // Shared Preferences
@@ -35,6 +35,9 @@ public class SessionManagement {
     // Email address (make variable public to access from outside)
     public static final String KEY_ID = "id";
 
+    public static final String DATA_ID = "data";
+
+
     // Constructor
     public SessionManagement(Context context){
         this._context = context;
@@ -58,6 +61,7 @@ public class SessionManagement {
         // commit changes
         editor.commit();
     }
+
 
     /**
      * Check login method wil check user login status

@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:windowSoftInputMode="stateHidden">
         <activity
-            android:name=".LoginAc.login_home"
+            android:name=".Activities.login_home"
             android:theme="@style/AppTheme">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -20,35 +20,35 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LoginAc.Slogin"
+            android:name=".Activities.Slogin"
             android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.LOGIN" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".Home.S_Home"
+            android:name=".Activities.S_Home"
             android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.HOME" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".Appoint"
+            android:name=".Activities.Appoint"
             android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.APPOINT" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".LoginAc.Flogin"
+            android:name=".Activities.Flogin"
             android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.LOGIN" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".LoginAc.P_Reset"
+            android:name=".Activities.P_Reset"
             android:label="Password Change"
             android:theme="@style/AppTheme">
             <intent-filter>
@@ -56,14 +56,14 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Home.F_Home"
+            android:name=".Activities.F_Home"
             android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.HOME" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".Reply"
+            android:name=".Activities.Reply"
             android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.REPLY" />

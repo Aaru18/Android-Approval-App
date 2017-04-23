@@ -1,12 +1,14 @@
-package in.ac.lnmiit.android.appointr.LoginAc;
+package in.ac.lnmiit.android.appointr.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
-import in.ac.lnmiit.android.appointr.ApiCall.SessionManagement;
+import in.ac.lnmiit.android.appointr.Functions.AppStatus;
+import in.ac.lnmiit.android.appointr.Functions.SessionManagement;
 import in.ac.lnmiit.android.appointr.R;
 
 public class login_home extends AppCompatActivity {
@@ -18,12 +20,18 @@ public class login_home extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_home);
 
-        session = new SessionManagement(getApplicationContext());
-        if(session.isLoggedIn()){
-            session.checkLogin();
-            finish();
-        }
 
+        if (AppStatus.getInstance(this).isOnline()) {
+            session = new SessionManagement(getApplicationContext());
+            if(session.isLoggedIn()){
+                session.checkLogin();
+                finish();
+            }
+
+        } else {
+
+           Toast.makeText(this,"You are not online!!!!",Toast.LENGTH_LONG).show();
+        }
 
 
         btnFaculty = (Button) findViewById(R.id.faculty);

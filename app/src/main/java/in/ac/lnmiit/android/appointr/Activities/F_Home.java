@@ -1,6 +1,7 @@
-package in.ac.lnmiit.android.appointr.Home;
+package in.ac.lnmiit.android.appointr.Activities;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -11,48 +12,56 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.List;
+import java.util.concurrent.BlockingQueue;
+
 import in.ac.lnmiit.android.appointr.Adapters.CategoryAdapter;
-import in.ac.lnmiit.android.appointr.ApiCall.SessionManagement;
-import in.ac.lnmiit.android.appointr.LoginAc.P_Reset;
-import in.ac.lnmiit.android.appointr.LoginAc.login_home;
+import in.ac.lnmiit.android.appointr.DatabaseConnections.DatabaseCalls;
+import in.ac.lnmiit.android.appointr.DatabaseConnections.DatabaseHelper;
+import in.ac.lnmiit.android.appointr.Functions.SessionManagement;
 import in.ac.lnmiit.android.appointr.R;
+import in.ac.lnmiit.android.appointr.models.Request;
+import in.ac.lnmiit.android.appointr.models.RequestReq;
 
 public class F_Home extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener  {
-
+    private static final String TAG = Appoint.class.getSimpleName();
+    SessionManagement session ;
     private Toolbar toolbar;
-
+    List<Request> requests;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.faculty_home);
-        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager1);
+        session = new SessionManagement(getApplicationContext());
+        DatabaseHelper help = new DatabaseHelper(getApplicationContext());
 
 
-        CategoryAdapter adapter = new CategoryAdapter(this, getSupportFragmentManager());
-
-        // Set the adapter onto the view pager
-        viewPager.setAdapter(adapter);
-
-        // Find the tab layout that shows the tabs
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs1);
-        tabLayout.setupWithViewPager(viewPager);
         toolbar = (Toolbar) findViewById(R.id.faculty_toolbar);
         setSupportActionBar(toolbar);
-
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_faculty);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
-
-
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_faculty);
         navigationView.setNavigationItemSelectedListener(this);
+        View header=navigationView.getHeaderView(0);
+        ImageView image =(ImageView) header.findViewById(R.id.img_nav);
+        TextView name =   (TextView) header.findViewById(R.id.name_header);
+        TextView email = (TextView) header.findViewById(R.id.email_header);
+
+        image.setImageResource(R.drawable.ic_team);
+        name.setText(help.getFaculty(session.getID()).getFaculty_name());
+        email.setText(help.getFaculty(session.getID()).getDepartments());
+        help.closeDB();
+        new PrefetchData().execute();
 
 
     }
@@ -80,9 +89,10 @@ public class F_Home extends AppCompatActivity implements NavigationView.OnNaviga
             finish();
 
         } else if (id == R.id.nav_logout) {
-            SessionManagement session = new SessionManagement(getApplicationContext());
             session.logoutUser();
+            new DatabaseHelper(getApplicationContext()).deleteDB(getApplicationContext());
             Toast.makeText(getApplicationContext(), "User Successfully Logged Out", Toast.LENGTH_SHORT).show();
+
             Intent intent = new Intent(F_Home.this, login_home.class);
             startActivity(intent);
             finish();
@@ -97,6 +107,49 @@ public class F_Home extends AppCompatActivity implements NavigationView.OnNaviga
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_faculty);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private class PrefetchData extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+
+        }
+
+        @Override
+        protected Void doInBackground(Void... arg0) {
+
+            BlockingQueue<RequestReq> requestss =  (new DatabaseCalls(getApplicationContext())).showRequests();
+            try {
+                RequestReq requestReq = requestss.take();
+                requests = requestReq.getRequests();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            super.onPostExecute(result);
+
+
+            findViewById(R.id.loadingPanel).setVisibility(View.GONE);
+            findViewById(R.id.tabs1).setVisibility(View.VISIBLE);
+            TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs1);
+            ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager1);
+            CategoryAdapter adapter = new CategoryAdapter(getApplicationContext(), getSupportFragmentManager());
+            viewPager.setAdapter(adapter);
+            tabLayout.setupWithViewPager(viewPager);
+
+        }
+
+    }
+    public List<Request> getRequestss(){
+        return requests;
+
     }
 
 }

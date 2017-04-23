@@ -1,6 +1,7 @@
-package in.ac.lnmiit.android.appointr.Home;
+package in.ac.lnmiit.android.appointr.Activities;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -13,20 +14,26 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.List;
+import java.util.concurrent.BlockingQueue;
+
 import in.ac.lnmiit.android.appointr.Adapters.CategoryAdapter;
-import in.ac.lnmiit.android.appointr.ApiCall.SessionManagement;
-import in.ac.lnmiit.android.appointr.Appoint;
-import in.ac.lnmiit.android.appointr.LoginAc.P_Reset;
-import in.ac.lnmiit.android.appointr.LoginAc.login_home;
+import in.ac.lnmiit.android.appointr.DatabaseConnections.DatabaseCalls;
+import in.ac.lnmiit.android.appointr.DatabaseConnections.DatabaseHelper;
+import in.ac.lnmiit.android.appointr.Functions.SessionManagement;
 import in.ac.lnmiit.android.appointr.R;
+import in.ac.lnmiit.android.appointr.models.Request;
+import in.ac.lnmiit.android.appointr.models.RequestReq;
 
 public class S_Home extends AppCompatActivity  implements NavigationView.OnNavigationItemSelectedListener {
 
-
+    SessionManagement session ;
     private Toolbar toolbar;
-
+    List<Request> requests;
+    int success=0;
 
 
 
@@ -34,19 +41,10 @@ public class S_Home extends AppCompatActivity  implements NavigationView.OnNavig
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.student_home);
-        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager2);
+        DatabaseHelper help = new DatabaseHelper(getApplicationContext());
+        session = new SessionManagement(getApplicationContext());
 
 
-        CategoryAdapter adapter = new CategoryAdapter(this, getSupportFragmentManager());
-
-        // Set the adapter onto the view pager
-        viewPager.setAdapter(adapter);
-
-        // Find the tab layout that shows the tabs
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs2);
-
-
-        tabLayout.setupWithViewPager(viewPager);
 
 
         toolbar = (Toolbar) findViewById(R.id.student_toolbar);
@@ -70,6 +68,16 @@ public class S_Home extends AppCompatActivity  implements NavigationView.OnNavig
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_student);
         navigationView.setNavigationItemSelectedListener(this);
+        View header=navigationView.getHeaderView(0);
+        ImageView image =(ImageView) header.findViewById(R.id.img_nav);
+        TextView name =   (TextView) header.findViewById(R.id.name_header);
+        TextView email = (TextView) header.findViewById(R.id.email_header);
+
+        image.setImageResource(R.drawable.ic_learning);
+        name.setText(help.getStudent(session.getID()).getStudent_name());
+        email.setText(help.getStudent(session.getID()).getRoll_no());
+        help.closeDB();
+        new PrefetchData().execute();
 
     }
     @Override
@@ -94,8 +102,8 @@ public class S_Home extends AppCompatActivity  implements NavigationView.OnNavig
             startActivity(intent);
             finish();
         } else if (id == R.id.nav_logout) {
-            SessionManagement session = new SessionManagement(getApplicationContext());
             session.logoutUser();
+            new DatabaseHelper(getApplicationContext()).deleteDB(getApplicationContext());
             Toast.makeText(getApplicationContext(), "User Successfully Logged Out", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(S_Home.this, login_home.class);
             startActivity(intent);
@@ -112,6 +120,57 @@ public class S_Home extends AppCompatActivity  implements NavigationView.OnNavig
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    private class PrefetchData extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+
+        }
+
+        @Override
+        protected Void doInBackground(Void... arg0) {
+
+            BlockingQueue<RequestReq> requestss =  (new DatabaseCalls(getApplicationContext())).showRequests();
+            try {
+                RequestReq requestReq = requestss.take();
+                success = requestReq.getSuccess();
+                if(success == 1){
+                    requests = requestReq.getRequests();
+                }
+                else{
+                    requests = null;
+                }
+
+
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            super.onPostExecute(result);
+            findViewById(R.id.loadingPanel2).setVisibility(View.GONE);
+                findViewById(R.id.tabs2).setVisibility(View.VISIBLE);
+                ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager2);
+                CategoryAdapter adapter = new CategoryAdapter(getApplicationContext(), getSupportFragmentManager());
+                viewPager.setAdapter(adapter);
+                TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs2);
+                tabLayout.setupWithViewPager(viewPager);
+
+
+        }
+
+    }
+    public List<Request> getRequestss(){
+        return requests;
+
+    }
+
 
 }
 
