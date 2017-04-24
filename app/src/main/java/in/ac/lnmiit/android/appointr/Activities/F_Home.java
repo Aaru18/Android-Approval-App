@@ -1,6 +1,7 @@
 package in.ac.lnmiit.android.appointr.Activities;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -23,6 +24,7 @@ import java.util.concurrent.BlockingQueue;
 import in.ac.lnmiit.android.appointr.Adapters.CategoryAdapter;
 import in.ac.lnmiit.android.appointr.DatabaseConnections.DatabaseCalls;
 import in.ac.lnmiit.android.appointr.DatabaseConnections.DatabaseHelper;
+import in.ac.lnmiit.android.appointr.Functions.AppStatus;
 import in.ac.lnmiit.android.appointr.Functions.SessionManagement;
 import in.ac.lnmiit.android.appointr.R;
 import in.ac.lnmiit.android.appointr.models.Request;
@@ -32,6 +34,7 @@ public class F_Home extends AppCompatActivity implements NavigationView.OnNaviga
     private static final String TAG = Appoint.class.getSimpleName();
     SessionManagement session ;
     private Toolbar toolbar;
+    int success=0;
     List<Request> requests;
 
 
@@ -45,6 +48,13 @@ public class F_Home extends AppCompatActivity implements NavigationView.OnNaviga
 
         toolbar = (Toolbar) findViewById(R.id.faculty_toolbar);
         setSupportActionBar(toolbar);
+        ImageView refresh = (ImageView) findViewById(R.id.refresh_faculty);
+        refresh.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View view) {
+                refresh(view);
+            }
+        });
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_faculty);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -53,6 +63,8 @@ public class F_Home extends AppCompatActivity implements NavigationView.OnNaviga
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_faculty);
         navigationView.setNavigationItemSelectedListener(this);
         View header=navigationView.getHeaderView(0);
+        navigationView.getMenu().getItem(0).setChecked(true);
+
         ImageView image =(ImageView) header.findViewById(R.id.img_nav);
         TextView name =   (TextView) header.findViewById(R.id.name_header);
         TextView email = (TextView) header.findViewById(R.id.email_header);
@@ -61,10 +73,23 @@ public class F_Home extends AppCompatActivity implements NavigationView.OnNaviga
         name.setText(help.getFaculty(session.getID()).getFaculty_name());
         email.setText(help.getFaculty(session.getID()).getDepartments());
         help.closeDB();
-        new PrefetchData().execute();
+        if (AppStatus.getInstance(getApplicationContext()).isOnline()) {
+
+            new PrefetchData().execute();
+        } else {
+            findViewById(R.id.loadingPanel).setVisibility(View.GONE);
+            Toast.makeText(getApplicationContext(),"You are not online!!!!",Toast.LENGTH_LONG).show();
+        }
 
 
     }
+    public void refresh(View view){
+        Intent i = new Intent(F_Home.this, F_Home.class);  //your class
+        startActivity(i);
+        finish();
+    }
+
+
 
     @Override
     public void onBackPressed() {
@@ -83,25 +108,41 @@ public class F_Home extends AppCompatActivity implements NavigationView.OnNaviga
         int id = item.getItemId();
 
         if (id == R.id.nav_change_password) {
+            item.setChecked(false);
             Intent intent = new Intent(F_Home.this, P_Reset.class);
-            intent.putExtra("activity","faculty");
             startActivity(intent);
-            finish();
-
         } else if (id == R.id.nav_logout) {
             session.logoutUser();
             new DatabaseHelper(getApplicationContext()).deleteDB(getApplicationContext());
             Toast.makeText(getApplicationContext(), "User Successfully Logged Out", Toast.LENGTH_SHORT).show();
-
             Intent intent = new Intent(F_Home.this, login_home.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
             finish();
         } else if (id == R.id.nav_share) {
 
+            final String appPackageName = getPackageName();
+            Intent share = new Intent(Intent.ACTION_SEND);
+            share.setType("text/plain");
+            share.putExtra(Intent.EXTRA_SUBJECT, "Appointr: Appointment Approval App");
+            share.putExtra(Intent.EXTRA_TEXT, "https://play.google.com/store/apps/details?id=" + appPackageName);
+            startActivity(Intent.createChooser(share, "Share link!"));
+
         } else if (id == R.id.nav_feedback) {
+
+            Intent intent = new Intent(Intent.ACTION_SENDTO);
+            intent.setData(Uri.parse("mailto: appointrAdmin@lnmiit.ac.in"));
+            intent.putExtra(Intent.EXTRA_SUBJECT, "Appointr App Feedback");
+            startActivity(Intent.createChooser(intent, "Send feedback"));
 
         } else if (id == R.id.nav_aboutus) {
 
+            final String appPackageName = getPackageName();
+            try {
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
+            } catch (android.content.ActivityNotFoundException anfe) {
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
+            }
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_faculty);
@@ -123,7 +164,13 @@ public class F_Home extends AppCompatActivity implements NavigationView.OnNaviga
             BlockingQueue<RequestReq> requestss =  (new DatabaseCalls(getApplicationContext())).showRequests();
             try {
                 RequestReq requestReq = requestss.take();
-                requests = requestReq.getRequests();
+                success = requestReq.getSuccess();
+                if(success == 1){
+                    requests = requestReq.getRequests();
+                }
+                else{
+                    requests = null;
+                }
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

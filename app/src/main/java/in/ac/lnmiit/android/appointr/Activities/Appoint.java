@@ -94,9 +94,7 @@ public class Appoint extends AppCompatActivity {
         appoint.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
-                Intent intent = new Intent(Appoint.this, S_Home.class);
-                startActivity(intent);
-                finish();
+               onBackPressed();
                 // Do something in response to button click
             }
         });
@@ -197,12 +195,6 @@ public class Appoint extends AppCompatActivity {
         }
     };
 
-    @Override
-    public void onBackPressed() {
-        Intent intent = new Intent(Appoint.this, S_Home.class);
-        startActivity(intent);
-        finish();
-    }
 
     private class PrefetchData extends AsyncTask<Void, Void, Void> {
         int student_id;
@@ -251,6 +243,7 @@ public class Appoint extends AppCompatActivity {
 
                 Toast.makeText(getApplicationContext(), general.getMessage(), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(Appoint.this, S_Home.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 finish();
             }

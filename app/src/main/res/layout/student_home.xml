@@ -9,18 +9,6 @@
     tools:openDrawer="start"
     tools:context="in.ac.lnmiit.android.appointr.Activities.S_Home">
     <LinearLayout
-        android:id="@+id/no_re"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="visible"
-        android:orientation="vertical">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="No Requests"
-            android:gravity="center_vertical"/>
-    </LinearLayout>
-    <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
@@ -41,18 +29,29 @@
                 android:layout_height="match_parent">
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="8"
+                    android:layout_weight="6"
                     android:layout_height="match_parent"
                     android:text="Home"
                     android:gravity="center_vertical"
                     android:textSize="18sp"
-                    android:paddingLeft="18dp"
+                    android:paddingLeft="16dp"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
                     android:textColor="#FFFFFF"/>
+                <ImageView
+                    android:id="@+id/refresh_student"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:padding="2dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_refresh_white_24dp"
+                    android:layout_marginRight="8dp"/>
+
                 <ImageView
                     android:id="@+id/create"
                     android:layout_width="0dp"
                     android:layout_weight="1"
-                    android:padding="4dp"
+                    android:padding="2dp"
                     android:layout_height="match_parent"
                     android:src="@drawable/ic_action_create"
                     android:layout_marginRight="16dp"/>
@@ -103,7 +102,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
-        app:theme="@style/AppTheme1"
+        android:theme="@style/AppTheme1"
         app:headerLayout="@layout/nav_header"
         app:menu="@menu/activity_nav_drawer" />
 

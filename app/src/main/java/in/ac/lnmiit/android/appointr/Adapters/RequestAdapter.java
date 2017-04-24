@@ -54,9 +54,8 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.MyViewHo
             public void onClick(View v) {
                 if (session.getSession().equals("faculty")) {
                     Intent intent = new Intent(activity, Reply.class);
-                    intent.putExtra("request_id", requestList.get(position).getRequest_id());
+                    intent.putExtra("Request", request);
                     activity.startActivity(intent);
-                    activity.finish();
                 }
             }
         });
@@ -79,7 +78,7 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.MyViewHo
         holder.reason.setText(request.getReason());
         holder.date.setText(FunctionUsed.getStringFromDate(request.getRequest_date()));
         holder.time.setText(FunctionUsed.getTimeFromDate(request.getRequest_date()));
-
+        helpp.closeDB();
 
     }
 

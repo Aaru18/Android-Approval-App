@@ -31,8 +31,18 @@
                     android:text="Home"
                     android:gravity="center_vertical"
                     android:textSize="18sp"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
                     android:paddingLeft="16dp"
                     android:textColor="#FFFFFF"/>
+                <ImageView
+                    android:id="@+id/refresh_faculty"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:padding="2dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_refresh_white_24dp"
+                    android:layout_marginRight="16dp"/>
 
             </LinearLayout>
 
@@ -80,7 +90,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
-        app:theme="@style/AppTheme1"
+        android:theme="@style/AppTheme1"
         app:headerLayout="@layout/nav_header"
         app:menu="@menu/activity_nav_drawer" />
 

@@ -47,4 +47,6 @@ public interface ApiInterface {
     @FormUrlEncoded
     @POST("delete.php")
     Call<General_Query> deleteAppointment(@FieldMap Map<String, String> names);
+
+
 }

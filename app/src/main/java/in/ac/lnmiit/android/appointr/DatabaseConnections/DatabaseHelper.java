@@ -27,7 +27,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     // Common column names
     private static final String KEY_ID = "user_id";
-
+    private static final String EMAIL_ID = "email_id";
 
     // STUDENTS Table - column nmaes
     private static final String KEY_STUDENTS_NAME = "student_name";
@@ -41,12 +41,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     // Student table create statement
     private static final String CREATE_STUDENT = "CREATE TABLE "
             + STUDENTS + "(" + KEY_ID + " INTEGER PRIMARY KEY," + KEY_STUDENTS_NAME
-            + " TEXT," + KEY_ROLLNO + " TEXT" + ")";
+            + " TEXT," + KEY_ROLLNO + " TEXT," + EMAIL_ID + " TEXT" + ")";
 
     // Faculty table create statement
     private static final String CREATE_FACULTY = "CREATE TABLE " + FACULTIES
             + "(" + KEY_ID + " INTEGER PRIMARY KEY," + KEY_FACULTY_NAME + " TEXT,"
-            + KEY_DEPARTMENTS + " TEXT"  + ")";
+            + KEY_DEPARTMENTS + " TEXT"  +  ")";
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -76,7 +76,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(KEY_ID, student.getUser_id());
         values.put(KEY_STUDENTS_NAME, student.getStudent_name());
         values.put(KEY_ROLLNO, student.getRoll_no());
-
+        values.put(EMAIL_ID,student.getEmail_id());
         db.insert(STUDENTS, null, values);
     }
 
@@ -87,7 +87,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(KEY_ID, faculty.getUser_id());
         values.put(KEY_FACULTY_NAME, faculty.getFaculty_name());
         values.put(KEY_DEPARTMENTS, faculty.getDepartments());
-
         db.insert(FACULTIES, null, values);
     }
 
@@ -111,7 +110,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         td.setUser_id(c.getInt(c.getColumnIndex(KEY_ID)));
         td.setStudent_name((c.getString(c.getColumnIndex(KEY_STUDENTS_NAME))));
         td.setRoll_no((c.getString(c.getColumnIndex(KEY_ROLLNO))));
-
+        td.setEmail_id((c.getString(c.getColumnIndex(EMAIL_ID))));
         return td;
     }
     public Faculty getFaculty(int userId) {
@@ -151,7 +150,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 td.setUser_id(c.getInt(c.getColumnIndex(KEY_ID)));
                 td.setStudent_name((c.getString(c.getColumnIndex(KEY_STUDENTS_NAME))));
                 td.setRoll_no((c.getString(c.getColumnIndex(KEY_ROLLNO))));
-
+                td.setEmail_id((c.getString(c.getColumnIndex(EMAIL_ID))));
                 // adding to todo list
                 todos.add(td);
             } while (c.moveToNext());

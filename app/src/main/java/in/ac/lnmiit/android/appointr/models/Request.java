@@ -2,7 +2,9 @@ package in.ac.lnmiit.android.appointr.models;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Request {
+import java.io.Serializable;
+
+public class Request implements Serializable {
     @SerializedName("request_id")
     private int request_id;
     @SerializedName("faculty_id")
